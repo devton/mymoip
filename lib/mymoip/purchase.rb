@@ -1,7 +1,7 @@
 module MyMoip
   class Purchase
     attr_accessor :id, :price, :credit_card, :payer, :reason
-    attr_reader :code, :authorization, :request
+    attr_reader :code, :authorization_response, :request_response
 
     def initialize(attrs)
       @id          = attrs.fetch(:id) { rand }
@@ -19,8 +19,8 @@ module MyMoip
       request.api_call(payment, token: authorization.token)
 
       @code = request.code
-      @authorization = authorization
-      @request = request
+      @authorization_response ||= authorization
+      @request_response ||= request.response
       request.success?
     end
 
