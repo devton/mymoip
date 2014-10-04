@@ -43,6 +43,16 @@ module MyMoip
       MyMoip.api_url + PAYMENT_SLIP_PATH + token if success?
     end
 
+    def token
+      @token
+    end
+
+    def status
+      @response["Status"]
+    rescue NoMethodError => e
+      nil
+    end
+
     def code
       @response["CodigoMoIP"]
     rescue NoMethodError => e
