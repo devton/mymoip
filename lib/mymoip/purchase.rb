@@ -1,7 +1,7 @@
 module MyMoip
   class Purchase
     attr_accessor :id, :price, :credit_card, :payer, :reason
-    attr_reader :code
+    attr_reader :code, :authorization, :request
 
     def initialize(attrs)
       @id          = attrs.fetch(:id) { rand }
