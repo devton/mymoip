@@ -19,6 +19,8 @@ module MyMoip
       request.api_call(payment, token: authorization.token)
 
       @code = request.code
+      @authorization = authorization
+      @request = request
       request.success?
     end
 
