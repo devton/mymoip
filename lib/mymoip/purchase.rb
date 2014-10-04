@@ -15,14 +15,14 @@ module MyMoip
       authorization = get_authorization!
       payment = MyMoip::CreditCardPayment.new(@credit_card,
                                               installments: 1)
-      request = MyMoip::PaymentRequest.new(@id)
-      request.api_call(payment, token: authorization.token)
+      @request ||= MyMoip::PaymentRequest.new(@id)
+      @request.api_call(payment, token: authorization.token)
 
-      @code = request.code
+      @code = @request.code
       @token = authorization.token
-      @transaction_id = request.response['CodigoMoip']
-      @status = request.response['Status']
-      request.success?
+      @transaction_id = @request.response['CodigoMoip']
+      @status = @request.response['Status']
+      @request.success?
     end
 
     private
